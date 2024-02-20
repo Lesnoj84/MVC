@@ -19,6 +19,8 @@ namespace WPF_C__Tutorials
         public MainWindow()
         {
             InitializeComponent();
+           
+
         }
     }
 }
