@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +18,40 @@ namespace WPF_ListView_ObservableCollection
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableCollection<string>entries = new ObservableCollection<string>();
+
+        public ObservableCollection<string> Entries
+        {
+            get { return entries; }
+            set { entries = value; } 
+        }
+
+
         public MainWindow()
         {
+            DataContext = this;
             InitializeComponent();
+            
+        }
+
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            entries.Add(txtBox.Text);
+        }
+
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var removeItems = new ArrayList(lsView.SelectedItems);
+
+            foreach (var item in removeItems)
+            {
+                entries.Remove((string)item);
+            }
+        }
+
+        private void clearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            entries.Clear();
         }
     }
 }
