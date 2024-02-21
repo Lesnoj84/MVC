@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBox x:Name="txtInput" VerticalAlignment="Center" Width="250" Height="40" FontSize="16"
-                 Text="{Binding BoundText, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource} "/>
+                 Text="{Binding BoundText, UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"/>
         <Button Grid.Row="1" x:Name="btnSet" Content="Set" Width="100" Height="40"/>
         <TextBlock Grid.Row="2" x:Name="tbResult" FontSize="16" Text="{Binding BoundText}"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
