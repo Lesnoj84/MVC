@@ -1,12 +1,24 @@
-﻿<Window x:Class="WPF_C__Tutorials.MainWindow"
+﻿<Window x:Class="WPF_CS_Tutorials.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_C__Tutorials"
+        xmlns:local="clr-namespace:WPF_CS_Tutorials"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="5">
+        
+        <StackPanel>
+        <TextBox x:Name="txtbox" Width="600" Height="150" Text="{Binding InputedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="saveBtn" Width="50" Height="25" Margin="10" Content="Save" Click="saveBtn_Click" />
+            <ListView x:Name="myList" Height="150" Width="600">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Company Name" Width="auto" DisplayMemberBinding="{Binding}"/>
+                        <GridViewColumn Header="Persone" Width="auto" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_C# Tutorials", "WPF_C# Tutorials\WPF_C# Tutorials.csproj", "{46845F48-71D8-4CEE-B2A8-9E9E2A41B7C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_CS_Tutorials", "WPF_C# Tutorials\WPF_CS_Tutorials.csproj", "{46845F48-71D8-4CEE-B2A8-9E9E2A41B7C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_ListView", "WPF_ListView\WPF_ListView.csproj", "{1EF3F48E-AF2F-40CC-B72D-9CD2CA9ECD4D}"
 EndProject
@@ -11,7 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_ListView_ObservableColl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_DataBindings", "WPF_DataBindings\WPF_DataBindings.csproj", "{8DB491B6-D705-493C-A504-F7158576DBD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_CustomControls", "WPF_CustomControls\WPF_CustomControls.csproj", "{DA31AF3A-B939-44E6-87B7-502F46C25C38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_CustomControls", "WPF_CustomControls\WPF_CustomControls.csproj", "{DA31AF3A-B939-44E6-87B7-502F46C25C38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBinding Samples", "DataBinding Samples", "{766F0E4D-E947-4F88-88EF-5BFD4E5E412E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_DataBinding_II", "WPF_DataBinding_II\WPF_DataBinding_II.csproj", "{83C23262-F923-4051-A1CC-37B3CF36C1C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REST AI", "..\..\REST AI\REST AI\REST AI.csproj", "{917BAB43-EE1C-4B1D-A6B6-9A2E3462E499}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM_WeatherApp", "MVVM\MVVM_WeatherApp.csproj", "{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +47,25 @@ Global
 		{DA31AF3A-B939-44E6-87B7-502F46C25C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA31AF3A-B939-44E6-87B7-502F46C25C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA31AF3A-B939-44E6-87B7-502F46C25C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C23262-F923-4051-A1CC-37B3CF36C1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C23262-F923-4051-A1CC-37B3CF36C1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C23262-F923-4051-A1CC-37B3CF36C1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C23262-F923-4051-A1CC-37B3CF36C1C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{917BAB43-EE1C-4B1D-A6B6-9A2E3462E499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{917BAB43-EE1C-4B1D-A6B6-9A2E3462E499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917BAB43-EE1C-4B1D-A6B6-9A2E3462E499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{917BAB43-EE1C-4B1D-A6B6-9A2E3462E499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8DB491B6-D705-493C-A504-F7158576DBD2} = {766F0E4D-E947-4F88-88EF-5BFD4E5E412E}
+		{83C23262-F923-4051-A1CC-37B3CF36C1C5} = {766F0E4D-E947-4F88-88EF-5BFD4E5E412E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CC9079E-E282-4FD7-868E-1D39C34D98F6}
