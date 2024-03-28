@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_DataBindings"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" x:Name="bckWindor">
     <Grid>
+        <Grid.Resources>
+            <local:MyData x:Key="md"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource md}"/>
+        </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -14,7 +20,11 @@
         </Grid.RowDefinitions>
         <TextBox x:Name="txtInput" VerticalAlignment="Center" Width="250" Height="40" FontSize="16"
                  Text="{Binding BoundText, UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"/>
-        <Button Grid.Row="1" x:Name="btnSet" Content="Set" Width="100" Height="40"/>
+        <TextBox Grid.Row="1" Width="150" Height="40" VerticalAlignment="Top" Text="{Binding Source={StaticResource md}, Path=SetColor, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnSet" Content="Set" Width="100" Height="40" Margin="5"/>
+            <Button x:Name="setColorBtn" Content="{Binding Source={StaticResource md}, Path= SetColor, Mode=TwoWay}" Width="100" Height="40" Margin="5" Click="setColorBtn_Click"/>
+        </StackPanel>
         <TextBlock Grid.Row="2" x:Name="tbResult" FontSize="16" Text="{Binding BoundText}"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>

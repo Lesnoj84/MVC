@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -18,13 +20,16 @@ namespace WPF_DataBindings
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        MyData myData = new MyData();
+
         public MainWindow()
         {
-            DataContext = this;
+            
             InitializeComponent();
+            DataContext = myData;
 
         }
-        
+
         private string boundText;
         public string BoundText
         {
@@ -43,7 +48,32 @@ namespace WPF_DataBindings
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         }
-    }
 
+        private void setColorBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            
+
+            string colorstr = myData.SetColor;
+            
+            PropertyInfo[] propertyInfos = typeof(Colors).GetProperties();
+            foreach (PropertyInfo info in propertyInfos)
+            {
+                if (colorstr == info.Name)
+                {
+                    Color color = (Color)ColorConverter.ConvertFromString(colorstr);
+                    bckWindor.Background = new SolidColorBrush(color);
+                    return;
+                }
+            }
+            colorstr = string.Empty;
+
+            if (colorstr == string.Empty)
+                MessageBox.Show("Color not found"); return;
+
+        }
+
+
+    }
 
 }

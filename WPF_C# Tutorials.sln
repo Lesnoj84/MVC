@@ -19,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_DataBinding_II", "WPF_D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REST AI", "..\..\REST AI\REST AI\REST AI.csproj", "{917BAB43-EE1C-4B1D-A6B6-9A2E3462E499}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM_WeatherApp", "MVVM\MVVM_WeatherApp.csproj", "{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM_WeatherApp", "MVVM\MVVM_WeatherApp.csproj", "{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM_DataBinding", "MVVM_DataBinding\MVVM_DataBinding.csproj", "{71015821-2F74-46A3-B1B2-50102A0A93C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvernoteClone", "EvernoteClone\EvernoteClone.csproj", "{46D629D0-7199-4734-8076-6A44FE64CE4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,14 @@ Global
 		{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD0E10ED-E309-4E4B-A116-74B15FBBCE65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71015821-2F74-46A3-B1B2-50102A0A93C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71015821-2F74-46A3-B1B2-50102A0A93C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71015821-2F74-46A3-B1B2-50102A0A93C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71015821-2F74-46A3-B1B2-50102A0A93C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D629D0-7199-4734-8076-6A44FE64CE4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D629D0-7199-4734-8076-6A44FE64CE4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D629D0-7199-4734-8076-6A44FE64CE4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D629D0-7199-4734-8076-6A44FE64CE4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +78,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8DB491B6-D705-493C-A504-F7158576DBD2} = {766F0E4D-E947-4F88-88EF-5BFD4E5E412E}
 		{83C23262-F923-4051-A1CC-37B3CF36C1C5} = {766F0E4D-E947-4F88-88EF-5BFD4E5E412E}
+		{71015821-2F74-46A3-B1B2-50102A0A93C9} = {766F0E4D-E947-4F88-88EF-5BFD4E5E412E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CC9079E-E282-4FD7-868E-1D39C34D98F6}
