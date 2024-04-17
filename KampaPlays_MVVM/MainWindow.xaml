@@ -1,0 +1,43 @@
+﻿<Window x:Class="KampaPlays_MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KampaPlays_MVVM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Items}" SelectedValue="{Binding SelectedItem}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
+                    <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}" Width="*"/>
+                    <DataGridTextColumn Header="Quanity (Pcs)" Binding="{Binding Quantity}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Column="1">
+                <Label Content="Name"/>
+                <TextBox x:Name="ItemNameTxtBox" Margin="5 0 5 15" Text="{Binding SelectedItem.ItemName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <Label Content="Serial Number" />
+                <TextBox Margin="5 0 5 15" Text="{Binding SelectedItem.SerialNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <Label Content="Quantity"/>
+                <TextBox Margin="5 0 5 15" Text="{Binding SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Add" Width="50" Height="25" Margin="5" Command="{Binding AddCommand}" />
+            <Button Content="Delete" Width="50" Height="25" Margin="5" Command="{Binding RemoveCommand}" />
+            <Button Content="Close" Width="50" Height="25" Margin="5" Command="{Binding CloseCommand}" />
+            <Button Content="Show" Width="50" Height="25" Margin="5" Command="{Binding ShowCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
