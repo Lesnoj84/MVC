@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddSingleton<GameClient>();
+builder.Services.AddSingleton<GameDb>();
 builder.Services.AddSingleton<Game>();
 
 var app = builder.Build();

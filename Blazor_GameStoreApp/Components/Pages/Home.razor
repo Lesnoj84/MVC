@@ -1,6 +1,7 @@
 ﻿@page "/"
 @rendermode InteractiveServer
-@inject GameClient GameClient
+@inject GameDb GameDb
+
 
 
 <PageTitle>Game Catalog</PageTitle>
@@ -9,7 +10,7 @@
 <div class="mt-2">
 <a class="btn btn-primary mb-2" role="button" href="/editgame">Add</a>
 </div>
-@if (games == null)
+@if (GameDb == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -24,12 +25,12 @@ else
         <th>Release Date</th>
         </thead>
         <tbody>
-            @foreach (var game in games )
+            @foreach (var game in GameDb.gamesList)
             {
                 <tr>
                     <td>@game.Id</td>
                     <td>@game.Name</td>
-                    <td>@game.Genre </td>
+                    <td>@game.GenreId </td>
                     <td class="text-end">@game.Price.ToString("C2")</td>
                     <td>@game.ReleasedDate.ToShortDateString()</td>
                 </tr>
@@ -40,13 +41,13 @@ else
 
 @code
 {
-    
+
 
     private Game[]? games;
 
     protected override void OnInitialized()
     {
-        games = GameClient.GetGames();
+        GameDb.GetGames();
     }
 
 }
