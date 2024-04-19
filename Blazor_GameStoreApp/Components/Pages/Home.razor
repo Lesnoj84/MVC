@@ -1,0 +1,47 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Game Catalog</PageTitle>
+
+<h1>Game Catalog</h1>
+@if (games == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Genre</th>
+        <th class="text-end">Price</th>
+        <th>Release Date</th>
+        </thead>
+        <tbody>
+            @foreach (var game in games )
+            {
+                <tr>
+                    <td>@game.Id</td>
+                    <td>@game.Name</td>
+                    <td>@game.Genre </td>
+                    <td class="text-end">@game.Price.ToString("C2")</td>
+                    <td>@game.ReleasedDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    private GameClient gameClient = new();
+
+    private Game[]? games;
+
+    protected override void OnInitialized()
+    {
+        games = gameClient.GetGames();
+    }
+
+}
