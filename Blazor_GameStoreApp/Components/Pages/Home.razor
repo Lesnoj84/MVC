@@ -1,9 +1,14 @@
 ﻿@page "/"
 @rendermode InteractiveServer
+@inject GameClient GameClient
+
 
 <PageTitle>Game Catalog</PageTitle>
 
 <h1>Game Catalog</h1>
+<div class="mt-2">
+<a class="btn btn-primary mb-2" role="button" href="/editgame">Add</a>
+</div>
 @if (games == null)
 {
     <p><em>Loading...</em></p>
@@ -35,13 +40,13 @@ else
 
 @code
 {
-    private GameClient gameClient = new();
+    
 
     private Game[]? games;
 
     protected override void OnInitialized()
     {
-        games = gameClient.GetGames();
+        games = GameClient.GetGames();
     }
 
 }

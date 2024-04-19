@@ -1,10 +1,13 @@
 using Blazor_GameStoreApp.Components;
+using Blazor_GameStoreApp.Components.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddSingleton<GameClient>();
+builder.Services.AddSingleton<Game>();
 
 var app = builder.Build();
 

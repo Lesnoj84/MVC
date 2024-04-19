@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvernoteClone", "EvernoteCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KampaPlays_MVVM", "KampaPlays_MVVM\KampaPlays_MVVM.csproj", "{41F7E4E1-109A-4ABA-9489-3349DB0D42B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obedy", "Obedy\Obedy.csproj", "{C54B2E56-E00B-48D5-8590-E8C8584138DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obedy", "Obedy\Obedy.csproj", "{C54B2E56-E00B-48D5-8590-E8C8584138DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor_GameStoreApp", "Blazor_GameStoreApp\Blazor_GameStoreApp.csproj", "{4F638239-B248-4451-B950-7947F00425B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{C54B2E56-E00B-48D5-8590-E8C8584138DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C54B2E56-E00B-48D5-8590-E8C8584138DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C54B2E56-E00B-48D5-8590-E8C8584138DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F638239-B248-4451-B950-7947F00425B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F638239-B248-4451-B950-7947F00425B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F638239-B248-4451-B950-7947F00425B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F638239-B248-4451-B950-7947F00425B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
