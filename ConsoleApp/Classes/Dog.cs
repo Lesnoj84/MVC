@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ConsoleApp.Interfaces;
+﻿using ConsoleApp.Interfaces;
 
 namespace ConsoleApp.Classes
 {
@@ -20,6 +15,6 @@ namespace ConsoleApp.Classes
         {
             Console.WriteLine($"{Name} the dog is doing Woof-woof");
         }
-        
+
     }
 }

@@ -30,6 +30,6 @@
             ArgumentNullException.ThrowIfNull(game);
             gamesList.Remove(game);
         }
-        
+
     }
 }

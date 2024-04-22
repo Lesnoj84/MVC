@@ -1,8 +1,4 @@
-﻿using ConsoleApp.Classes;
-using ConsoleApp.Interfaces;
-using System.IO;
-
-namespace ConsoleApp
+﻿namespace ConsoleApp
 {
     internal class Program
     {
@@ -22,7 +18,7 @@ namespace ConsoleApp
         {
 
 
-            var directory = Directory.GetFiles(path,"*",SearchOption.AllDirectories);
+            var directory = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
             List<string> result = new List<string>();
 
             foreach (string dir in directory)

@@ -22,9 +22,9 @@
                 <label for="genre" class="form-label">Genre:</label>
                 <InputSelect class="form-select" id="genre" @bind-Value="game.GenreId">
                     <option>@genreSelection</option>
-                    @if (gameDb.gamesList != null)
+                    @if (this.GameDb.gamesList != null)
                     {
-                        @foreach (var item in gameDb.gamesList)
+                        @foreach (var item in this.GameDb.gamesList)
                         {
                             <option>@item.GenreId</option>
                         }
@@ -51,23 +51,23 @@
 @code {
 
     [Parameter]
-    public int? Id { get; set; }
+    public int? id { get; set; }
 
     [SupplyParameterFromForm]
-    public Game game { get; set; } = new Game() { ReleasedDate = DateOnly.FromDateTime(DateTime.UtcNow) };
+    public Game? game { get; set; } = new Game() { ReleasedDate = DateOnly.FromDateTime(DateTime.UtcNow) };
 
-
-    public GameDb gameDb { get; set;} = new GameDb();
-
-    string title = string.Empty;
+    string? title = string.Empty;
     string genreSelection = string.Empty;
 
     protected override void OnParametersSet()
     {
-        if (game.Name != null) return;
-        else if (Id != null)
+        if (game.Name != null)
         {
-            game = GetSelectedGame(Id.Value);
+            return;
+        }
+        else if (id != null)
+        {
+            game = GameDb.gamesList.Find(x => x.Id == id);
             title = game.Name;
             genreSelection = game.GenreId;
         }
@@ -79,19 +79,14 @@
         }
     }
 
-    protected override void OnInitialized()
-    {
-        gameDb.GetGames();
-    }
-
     private void HandleSubmit()
     {
 
-        if (Id == null)
+        if (id == null)
         {
             var newGame = new Game()
                 {
-                    Id = gameDb.gamesList.Count + 1,
+                    Id = GameDb.gamesList.Count + 1,
                     Name = game.Name,
                     GenreId = game.GenreId,
                     Price = game.Price,
@@ -103,7 +98,7 @@
         else
         {
             ArgumentNullException.ThrowIfNull(game);
-            game.Id = Id.Value;
+            game.Id = id.Value;
             UpdateSelectedGame(game.Id);
             Navigate.NavigateTo("/");
         }
@@ -111,7 +106,7 @@
 
     private Game GetSelectedGame(int id)
     {
-        var game = gameDb.gamesList.Find(x => x.Id == id);
+        var game = GameDb.gamesList.Find(x => x.Id == id);
         ArgumentNullException.ThrowIfNull(game);
         return new Game { Id = game.Id, Name = game.Name, GenreId = game.GenreId, Price = game.Price, ReleasedDate = game.ReleasedDate };
     }
