@@ -1,5 +1,8 @@
 using Blazor_GameStoreApp.Components;
+using Blazor_GameStoreApp.Components.Controllers;
 using Blazor_GameStoreApp.Components.Model;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddSingleton<GameDb>();
 builder.Services.AddSingleton<Game>();
+builder.Services.AddSingleton<DeleteGame>();
+
 
 var app = builder.Build();
 
