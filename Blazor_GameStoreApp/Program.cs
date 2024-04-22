@@ -12,6 +12,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<GameDb>();
 builder.Services.AddSingleton<Game>();
 builder.Services.AddSingleton<DeleteGame>();
+builder.Services.AddSingleton<EditGame>();
 
 
 var app = builder.Build();

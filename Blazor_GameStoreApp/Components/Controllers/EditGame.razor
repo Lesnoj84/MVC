@@ -4,6 +4,8 @@
 @inject Game Game
 @inject GameDb GameDb
 
+
+
 <PageTitle>@title</PageTitle>
 <h3 class="mt-2">@title</h3>
 <div class="row">
@@ -22,7 +24,7 @@
                     <option>@genreSelection</option>
                     @if (gameDb.gamesList != null)
                     {
-                        @foreach (var item in GameDb.gamesList)
+                        @foreach (var item in gameDb.gamesList)
                         {
                             <option>@item</option>
                         }
@@ -33,7 +35,7 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price:</label>
-                <InputNumber class="form-control" id="price" @bind-Value="game.Price"/>
+                <InputNumber class="form-control" id="price" @bind-Value="game.Price" />
                 <ValidationMessage For="()=>game.Price" />
 
             </div>
@@ -54,7 +56,7 @@
     [SupplyParameterFromForm]
     public Game game { get; set; } = new Game() { ReleasedDate = DateOnly.FromDateTime(DateTime.UtcNow) };
 
-    GameDb gameDb = new GameDb();
+    public GameDb gameDb = new GameDb();
     string title = string.Empty;
     string genreSelection = string.Empty;
 
@@ -120,7 +122,21 @@
         editedGame.GenreId = game.GenreId;
         editedGame.Price = game.Price;
         editedGame.ReleasedDate = game.ReleasedDate;
-                
+
+    }
+
+    private Game ReturnId(int id)
+    {
+        var game = gameDb.gamesList.Find(x => x.Id == id);
+        ArgumentNullException.ThrowIfNull(game);
+        return game;
+    }
+
+    public void DeleteGame(int id)
+    {
+        var gameId = ReturnId(id);
+
+        GameDb.gamesList.Remove(gameId);
     }
 
 }

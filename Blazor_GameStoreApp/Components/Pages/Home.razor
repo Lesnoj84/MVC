@@ -1,6 +1,7 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 @inject GameDb GameDb
+@inject EditGame EditGame
 
 <PageTitle>Game Catalog</PageTitle>
 
@@ -58,11 +59,12 @@ else
 {
     private Game[]? games;
 
+    
     string text = string.Empty;
 
     protected override void OnInitialized()
     {
-        games = GameDb.GetGames();
+      games =  EditGame.gameDb.GetGames();
     }
     private static string GameUrl(int id) => $"/editgame/{id}";
 
