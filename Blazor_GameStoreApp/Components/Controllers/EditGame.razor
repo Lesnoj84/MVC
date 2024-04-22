@@ -26,7 +26,7 @@
                     {
                         @foreach (var item in gameDb.gamesList)
                         {
-                            <option>@item</option>
+                            <option>@item.GenreId</option>
                         }
                     }
                 </InputSelect>
@@ -56,7 +56,9 @@
     [SupplyParameterFromForm]
     public Game game { get; set; } = new Game() { ReleasedDate = DateOnly.FromDateTime(DateTime.UtcNow) };
 
-    public GameDb gameDb = new GameDb();
+
+    public GameDb gameDb { get; set;} = new GameDb();
+
     string title = string.Empty;
     string genreSelection = string.Empty;
 
@@ -95,7 +97,7 @@
                     Price = game.Price,
                     ReleasedDate = game.ReleasedDate
                 };
-            gameDb.gamesList.Add(newGame);
+            GameDb.AddGame(game);
             Navigate.NavigateTo("/");
         }
         else
@@ -124,19 +126,4 @@
         editedGame.ReleasedDate = game.ReleasedDate;
 
     }
-
-    private Game ReturnId(int id)
-    {
-        var game = gameDb.gamesList.Find(x => x.Id == id);
-        ArgumentNullException.ThrowIfNull(game);
-        return game;
-    }
-
-    public void DeleteGame(int id)
-    {
-        var gameId = ReturnId(id);
-
-        GameDb.gamesList.Remove(gameId);
-    }
-
 }

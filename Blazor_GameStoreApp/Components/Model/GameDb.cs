@@ -19,6 +19,17 @@
             return gamesList.ToArray();
         }
 
+
+        public void AddGame(Game game)
+        {
+            gamesList.Add(game);
+        }
+        public void RemoveGame(int id)
+        {
+            var game = gamesList.Find(x => x.Id == id);
+            ArgumentNullException.ThrowIfNull(game);
+            gamesList.Remove(game);
+        }
         
     }
 }

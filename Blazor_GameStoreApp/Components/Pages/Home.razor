@@ -1,7 +1,6 @@
 ﻿@page "/"
-@rendermode InteractiveServer
+@inject Game Game
 @inject GameDb GameDb
-@inject EditGame EditGame
 
 <PageTitle>Game Catalog</PageTitle>
 
@@ -10,7 +9,7 @@
 <div class="mt-2">
     <a class="btn btn-primary mb-2" role="button" href="/editgame">Add</a>
 </div>
-@if (GameDb == null)
+@if (games == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -57,14 +56,16 @@ else
 
 @code
 {
+    
     private Game[]? games;
 
-    
     string text = string.Empty;
+
+
 
     protected override void OnInitialized()
     {
-      games =  EditGame.gameDb.GetGames();
+        games = GameDb.GetGames();
     }
     private static string GameUrl(int id) => $"/editgame/{id}";
 

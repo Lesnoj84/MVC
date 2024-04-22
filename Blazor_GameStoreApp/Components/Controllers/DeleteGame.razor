@@ -3,8 +3,6 @@
 @inject EditGame EditGame
 @inject GameDb GameDb
 
-
-
 <div class="modal fade" id="@GetModalId(Game)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -45,7 +43,7 @@
     private void Confirm()
     {
         ArgumentNullException.ThrowIfNull(Game);
-        EditGame.DeleteGame(Game!.Id);
+        GameDb.RemoveGame(Game.Id);
         NavigationManager.Refresh();
     }
 }
