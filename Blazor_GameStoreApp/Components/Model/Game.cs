@@ -11,7 +11,7 @@ namespace Blazor_GameStoreApp.Components.Model
         public string? Name { get; set; }
 
         [Required(ErrorMessage = "Genre is required")]
-        public string? GenreId { get; set; }
+        public enumGameGenre Genre { get; set; }
 
         [Range(1, 100, ErrorMessage = "Price is required 1-100")]
         public decimal Price { get; set; }

@@ -20,17 +20,17 @@
             </div>
             <div class="mb-3">
                 <label for="genre" class="form-label">Genre:</label>
-                <InputSelect class="form-select" id="genre" @bind-Value="game.GenreId">
+                <InputSelect class="form-select" id="genre" @bind-Value="game.Genre">
                     <option>@genreSelection</option>
-                    @if (this.GameDb.gamesList != null)
+                    @if (GameDb.GameGenre != null)
                     {
-                        @foreach (var item in this.GameDb.gamesList)
+                        @foreach (var item in Enum.GetValues(typeof(enumGameGenre)))
                         {
-                            <option>@item.GenreId</option>
+                            <option>@item</option>
                         }
                     }
                 </InputSelect>
-                <ValidationMessage For="()=>game.GenreId" />
+                <ValidationMessage For="()=>game.Genre" />
 
             </div>
             <div class="mb-3">
@@ -57,7 +57,7 @@
     public Game? game { get; set; } = new Game() { ReleasedDate = DateOnly.FromDateTime(DateTime.UtcNow) };
 
     string? title = string.Empty;
-    string genreSelection = string.Empty;
+    enumGameGenre genreSelection;
 
     protected override void OnParametersSet()
     {
@@ -69,13 +69,13 @@
         {
             game = GameDb.gamesList.Find(x => x.Id == id);
             title = game.Name;
-            genreSelection = game.GenreId;
+            genreSelection = game.Genre;
         }
         else
         {
             game = new() { ReleasedDate = DateOnly.FromDateTime(DateTime.UtcNow) };
             title = "New Game";
-            genreSelection = "Select genre";
+            genreSelection = enumGameGenre.SelectGenre;
         }
     }
 
@@ -88,7 +88,7 @@
                 {
                     Id = GameDb.gamesList.Count + 1,
                     Name = game.Name,
-                    GenreId = game.GenreId,
+                    Genre = game.Genre,
                     Price = game.Price,
                     ReleasedDate = game.ReleasedDate
                 };
@@ -108,7 +108,7 @@
     {
         var game = GameDb.gamesList.Find(x => x.Id == id);
         ArgumentNullException.ThrowIfNull(game);
-        return new Game { Id = game.Id, Name = game.Name, GenreId = game.GenreId, Price = game.Price, ReleasedDate = game.ReleasedDate };
+        return new Game { Id = game.Id, Name = game.Name, Genre = game.Genre, Price = game.Price, ReleasedDate = game.ReleasedDate };
     }
 
     private void UpdateSelectedGame(int id)
@@ -116,7 +116,7 @@
         var editedGame = GameDb.gamesList.Find(x => x.Id == id);
         ArgumentNullException.ThrowIfNull(editedGame);
         editedGame.Name = game.Name;
-        editedGame.GenreId = game.GenreId;
+        editedGame.Genre = game.Genre;
         editedGame.Price = game.Price;
         editedGame.ReleasedDate = game.ReleasedDate;
 
