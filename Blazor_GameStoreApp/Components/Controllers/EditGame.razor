@@ -22,7 +22,7 @@
                 <label for="genre" class="form-label">Genre:</label>
                 <InputSelect class="form-select" id="genre" @bind-Value="game.Genre">
                     <option>@genreSelection</option>
-                    @if (GameDb.GameGenre != null)
+                    @if (GameDb!= null)
                     {
                         @foreach (var item in Enum.GetValues(typeof(enumGameGenre)))
                         {
