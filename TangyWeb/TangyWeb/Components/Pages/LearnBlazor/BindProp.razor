@@ -4,18 +4,20 @@
 
 <h3>Product @Product.Id</h3>
 Name: @Product.Name<br />
-Active: @Product.IsActive<br/> 
-Price: @Product.Price <br/>
+Status: @(Product.IsActive? "Active":"Out of Stock")<br/> 
 
-Price: <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" />
+<input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)"/>
 
-
+<div>
+Price: @Product.Price <br />
+Price: <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" /><br/>
+</div>
 @code {
     Demo_Product Product = new Demo_Product()
         {
             Id = 1,
             Name = "Rose Candle",
             Price = 11.5,
-            IsActive = true
+            IsActive = false
         };
 }
