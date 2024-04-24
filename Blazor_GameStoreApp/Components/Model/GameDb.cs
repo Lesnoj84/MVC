@@ -1,6 +1,6 @@
 ﻿namespace Blazor_GameStoreApp.Components.Model
 {
-    public class GameDb
+    public class GameDb(HttpClient httpClient)
     {
         public readonly List<Game> gamesList = [
         new(){Id=1,Name="Street Fighter",Genre=enumGameGenre.Fighting, Price=19.9M, ReleasedDate=new DateOnly(1992,3,15)},
@@ -11,11 +11,7 @@
 
 
        public enumGameGenre GameGenre;
-        public Game[] GetGames()
-        {
-            return gamesList.ToArray();
-        }
-
+        public async Task<Game[]> GetGamesAsync() => await httpClient.GetFromJsonAsync<Game[]>("games") ?? [];
 
         public void AddGame(Game game)
         {

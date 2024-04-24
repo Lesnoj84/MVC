@@ -6,10 +6,14 @@ using Blazor_GameStoreApp.Components.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var gameStoreApiUri = builder.Configuration["GameStoreAPI"]??
+    throw new Exception("GameStoreAPI is not set");
+
+builder.Services.AddHttpClient<GameDb>(client=>client.BaseAddress=new Uri(gameStoreApiUri));
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddSingleton<GameDb>();
 builder.Services.AddSingleton<Game>();
 builder.Services.AddSingleton<DeleteGame>();
 builder.Services.AddSingleton<EditGame>();
