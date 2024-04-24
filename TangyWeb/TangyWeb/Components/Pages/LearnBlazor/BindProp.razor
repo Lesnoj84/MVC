@@ -3,21 +3,63 @@
 @page "/bindprop"
 
 <h3>Product @Product.Id</h3>
-Name: @Product.Name<br />
-Status: @(Product.IsActive? "Active":"Out of Stock")<br/> 
+Name: @Product.Name
+<br />
+Active: @Product.IsActive
+<br />
+Status: @(Product.IsActive ? "Active" : "Inactive")
+<br />
+Property Selected: @selectedProp
+@if (!string.IsNullOrEmpty(selectedProp))
+{
+    <p>Property Value: @Product.ProductProps.FirstOrDefault(u => u.Key == selectedProp).Value</p>
+}
 
-<input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)"/>
 
-<div>
-Price: @Product.Price <br />
-Price: <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" /><br/>
+
+<br />
+
+<input type="checkbox" @bind="Product.IsActive" />
+
+
+
+<div class="m-3">
+    Price: @Product.Price <br />
+    Price: <input type="number" @bind="Product.Price" @bind:event="oninput" /><br />
 </div>
-@code {
+Product Properties:
+<select @bind="@selectedProp">
+    @if (Product.ProductProps!=null )
+    {
+        @foreach (var prop in Product.ProductProps)
+        {
+            <option value="@prop.Key">@prop.Key</option>
+        }       
+    }
+</select>
+
+
+
+
+
+
+@code
+{
+
+    private string selectedProp = string.Empty;
+
+
     Demo_Product Product = new Demo_Product()
         {
             Id = 1,
             Name = "Rose Candle",
             Price = 11.5,
-            IsActive = false
+            IsActive = true,
+            ProductProps = new List<Demo_Product_Prop>()
+            {   new Demo_Product_Prop{Id=1,Key="Color", Value="Black"},
+                new Demo_Product_Prop{Id=2,Key="Flavor", Value="Rose Jasmine"},
+                new Demo_Product_Prop{Id=3,Key="Size", Value="20oz"}
+            }
+
         };
 }
