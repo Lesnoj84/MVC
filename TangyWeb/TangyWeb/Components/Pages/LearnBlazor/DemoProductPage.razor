@@ -5,31 +5,29 @@
 <div class="col">
     <h3 class="text-primary">DemoProduct</h3>
 </div>
+<div>
+    <p>Favorite selected: @favSelected</p>
+</div>
 
 <div class="row border" style="background-color:azure ">
 
     @foreach (var item in bindProp.Products)
     {
-        <div class="bg-light border m-1 col-3">
-            <h4 class="text-secondary">Product- @item.Id</h4>
-            Name - @item.Name<br />
-            Show Properties: <input type="checkbox" @bind-value="item.IsActive" checked="@(item.IsActive?"checked":null)" />
-            <div class="mt-3">
-                @if (item.IsActive)
-                {
-                    @foreach (var prop in item.ProductProps)
-                    {
-                        <p>@prop.Key - @prop.Value</p>
-                       
-                    }
-                }
-            </div>
-        </div>
+        <_DemoProductComponent demo_Product="@item" OnFavoliteUpdated="CountSelected" />
     }
 </div>
 
 
 @code {
-    
+
     BindProp bindProp = new();
+
+    private int favSelected = 0;
+
+    private void CountSelected(bool isSelected)
+    {
+        if (isSelected) favSelected++;
+        else favSelected--;
+
+    }
 }
