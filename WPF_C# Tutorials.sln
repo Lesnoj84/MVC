@@ -35,13 +35,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Net", ".Net", "{FF9449C6-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console C#", "Console C#", "{7877A91B-1A0A-46A3-B07B-C59E5E57F4FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangyWeb", "TangyWeb\TangyWeb\TangyWeb.csproj", "{CCE8B16A-F01D-4E36-AFE7-F530C6FB320D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangyWeb", "TangyWeb\TangyWeb\TangyWeb.csproj", "{CCE8B16A-F01D-4E36-AFE7-F530C6FB320D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangyWeb.Client", "TangyWeb\TangyWeb.Client\TangyWeb.Client.csproj", "{C47B4068-B9D0-4B57-A5B2-FACE4FC10F16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangyWeb.Client", "TangyWeb\TangyWeb.Client\TangyWeb.Client.csproj", "{C47B4068-B9D0-4B57-A5B2-FACE4FC10F16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TangyWebProject", "TangyWebProject", "{7EED6498-57AF-45FE-9ECB-C318674541BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangyModels", "TangyModels\TangyModels.csproj", "{401F9EEE-B69D-4C54-9002-B3A2312B407E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangyModels", "TangyModels\TangyModels.csproj", "{401F9EEE-B69D-4C54-9002-B3A2312B407E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

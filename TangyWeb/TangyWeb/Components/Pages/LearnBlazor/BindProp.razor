@@ -4,9 +4,7 @@
 <div class="row border p-1">
     <div class="col border p-3 bg-light">
         <h3 class="text-primary">Playground</h3><hr />
-
         <div>
-
             <select @bind="selectedProduct">
                 <option value="" hidden selected>Select Product</option>
                 @if (Products != null)
@@ -21,7 +19,8 @@
         </div>
 
         <div>
-            Active: <input type="checkbox" @bind="Product.IsActive">
+
+            Active: <input type="checkbox" @bind="Product.IsActive" />
 
         </div>
         <div class="">
@@ -47,7 +46,7 @@
         <h3 class="text-primary">Product Summery</h3><hr />
         Name: @selectedProduct
         <br />
-        Active: @Product.IsActive
+        Active: @Products.FirstOrDefault().IsActive
         <br />
         Status: @(Product.IsActive ? "Active" : "Inactive")
         <br />
@@ -63,42 +62,41 @@
 
 </div>
 
-<div class="row border p-1">
-    <h3 class=" text-success ">Product Table</h3>
-    <div class="container">
+<div>
+    <div class="col-12 pt-4">
+        <h3 class=" text-success ">Product Table</h3>
+    </div>
 
-        <table>
-            <tr>
-                @if (Products != null)
-                    @foreach (var item in Products)
-                    {
-                        <div class="col mt-2">
+    <table class="table table-striped">
+        <tbody>
+            @if (Products != null)
+                @foreach (var item in Products)
+                {
+                    <tr>
+                        <td>
                             <input class="me-5" type="text" @bind=item.Name @bind:event="oninput" />
+                        </td>
+                        <td>
                             <input class="me-5" type="text" @bind=item.Price @bind:event="oninput" />
+                        </td>
+                        <td>
                             <input class="me-5" type="checkbox" @bind=item.IsActive />
-                        </div>
-                    }
-            </tr>
-        </table>
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+
+    <div class="mt-5">
+        <h3>Product Summery</h3>
+
+        @foreach (var item in Products)
+        {
+            <p>@item.Name [@item.Price] is @(item.IsActive ? "Active" : "inActive")</p>
+        }
+
     </div>
 </div>
-
-<div class="mt-5">
-    <h3>Product Summery</h3>
-    <table>
-        <tr>
-            @foreach (var item in Products)
-            {
-                <div class="container">
-                    <div class="row">
-                        <span>@item.Name <span>[@item.Price]<span> is @(item.IsActive ? "Active" : "nonActive") </span></span></span>
-                    </div>
-                </div>
-            }
-        </tr>
-    </table>
-</div>
-
 
 
 
@@ -131,15 +129,27 @@
         new(){
                 Id = 2,
                 Name = "Blossom Lily",
-                IsActive = true,
+                IsActive = false,
                 Price=13.99,
                 ProductProps = new()
                 {
                 new Demo_Product_Prop { Id = 1, Key = "Flavor", Value = "Lily" },
                 new Demo_Product_Prop { Id = 2, Key = "Size", Value = "18oz" },
                 new Demo_Product_Prop {Id = 3,Key = "Color",Value = "White"}
-                }}
-                };
+                }},
+        new()
+             {
+                 Id = 3,
+                 Name = "Rose Candle",
+                 IsActive = false,
+                 Price = 11.5,
+                 ProductProps = new List<Demo_Product_Prop>()
+                 {   new Demo_Product_Prop{Id=1,Key="Flavor", Value="Black Rose Jasmine"},
+                     new Demo_Product_Prop{Id=2,Key="Size", Value="20oz"},
+                     new Demo_Product_Prop{Id=3,Key="Color", Value="Black"}
+                 }
+             }};
+
 
 
     Demo_Product Product = new Demo_Product()
