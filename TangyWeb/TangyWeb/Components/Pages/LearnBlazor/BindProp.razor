@@ -112,7 +112,7 @@
 
 
     private string selectedProp = string.Empty;
-    private string selectedProduct = string.Empty;
+    private string selectedProduct { get; set; } = string.Empty;
     public List<Demo_Product> Products = new(){
         new(){
                 Id = 1,
@@ -149,9 +149,6 @@
                      new Demo_Product_Prop{Id=3,Key="Color", Value="Black"}
                  }
              }};
-
-
-
     Demo_Product Product = new Demo_Product()
         {
             Id = 1,
