@@ -7,13 +7,14 @@
 </div>
 <div>
     <p>Favorite selected: @favSelected</p>
+    <p>Last product selected: @lastProdSelecter</p>
 </div>
 
 <div class="row border" style="background-color:azure ">
 
     @foreach (var item in bindProp.Products)
     {
-        <_DemoProductComponent demo_Product="@item" OnFavoliteUpdated="CountSelected" />
+        <_DemoProductComponent demo_Product="@item" OnFavoliteUpdated="CountSelected" OnClickProductUpdated="GetLastProdSelected" />
     }
 </div>
 
@@ -24,10 +25,18 @@
 
     private int favSelected = 0;
 
+    private string lastProdSelecter = string.Empty;
+
     private void CountSelected(bool isSelected)
     {
         if (isSelected) favSelected++;
         else favSelected--;
 
     }
+
+    private void GetLastProdSelected(string productName)
+    {
+        lastProdSelecter = productName;
+    }
+
 }
