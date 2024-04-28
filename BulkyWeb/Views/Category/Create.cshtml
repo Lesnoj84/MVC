@@ -1,0 +1,44 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+
+<form method="post">
+    <div class="border p-3 mt-4 row">
+        <h2 class="text text-primary">@ViewData["Title"]</h2>
+        <hr />
+        <div>
+            <input asp-for="Id" hidden/>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3 row pt-1">
+            <label asp-for=Name class="pt-0" style="font-weight:600"></label> @*asp-for displays name of category parameters.*@
+            <input asp-for="Name" class="text-dark form-control border bg-dark bg-opacity-10" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row pt-1">
+            <label asp-for=DisplayOrder class="pt-0" style="font-weight:600"></label>
+            <input asp-for="DisplayOrder" class=" text-dark form-control border bg-dark bg-opacity-10" />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+
+        </div>
+        <div class="row justify-content-center">
+            <div class=" row col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Create</button>
+            </div>
+            <div class=" col-6 col-md-3">
+                <button asp-controller="Category" asp-action="Index" class="btn btn-outline-secondary form-control">Back</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*Adding custome Validation by using JavaScript.*@
+@* @section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+} *@
