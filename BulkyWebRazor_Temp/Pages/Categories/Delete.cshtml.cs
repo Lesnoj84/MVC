@@ -5,27 +5,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BulkyWebRazor_Temp.Pages.Categories
 {
-    public class CreateModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _db;
         [BindProperty]
         public Category Category { get; set; }
-        public CreateModel(ApplicationDbContext db)
+        public DeleteModel(ApplicationDbContext db)
         {
             _db = db;
         }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
-            
+            Category = _db.Categories.FirstOrDefault(u=>u.Id==id);
         }
 
         public IActionResult OnPost()
         {
-            if(Category != null)
+            if (Category != null)
             {
-                _db.Categories.Add(Category);
-                TempData["success"] = "Created successfuly";
+                _db.Categories.Remove(Category);
+                TempData["success"] = "Deleted successfuly";
                 _db.SaveChanges();
 
                 return RedirectToPage("Index");
@@ -33,5 +33,6 @@ namespace BulkyWebRazor_Temp.Pages.Categories
             return NotFound();
 
         }
+        
     }
 }

@@ -1,7 +1,7 @@
 ﻿@page
-@model BulkyWebRazor_Temp.Pages.Categories.CreateModel
+@model BulkyWebRazor_Temp.Pages.Categories.DeleteModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Delete";
 }
 
 <form method="post">
@@ -12,21 +12,18 @@
             <input asp-for="Category.Id" hidden />
         </div>
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="mb-3 row pt-1">
             <label asp-for="Category.Name" class="pt-0" style="font-weight:600"></label> @*asp-for displays name of category parameters.*@
-            <input asp-for="Category.Name" class="text-dark form-control border"/>
-            <span asp-validation-for="Category.Name" class="text-danger"></span>
+            <input asp-for="Category.Name" class="text-dark form-control border" />
         </div>
         <div class="mb-3 row pt-1">
             <label asp-for="Category.DisplayOrder" class="pt-0" style="font-weight:600"></label>
             <input asp-for="Category.DisplayOrder" class=" text-dark form-control border" />
-            <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
 
         </div>
         <div class="row justify-content-center">
             <div class=" row col-md-3">
-                <button type="submit" class="btn btn-primary form-control">Create</button>
+                <button type="submit" class="btn btn-danger form-control">Delete</button>
             </div>
             <div class=" col-6 col-md-3">
                 <a asp-page="/categories/Index" class="btn btn-outline-secondary form-control">Back</a>

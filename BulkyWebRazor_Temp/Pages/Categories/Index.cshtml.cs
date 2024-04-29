@@ -8,15 +8,19 @@ namespace BulkyWebRazor_Temp.Pages.Categories
     public class IndexModel : PageModel
     {
         public readonly ApplicationDbContext _db;
-        public List<Category> CategoryList { get; set; }
+        public List<Category> Categories { get; set; } = new List<Category>();
+
+
         public IndexModel(ApplicationDbContext db)
         {
             _db = db;
         }
 
+
         public void OnGet()
         {
-            CategoryList = _db.Categories.ToList();
+
+            Categories = _db.Categories.ToList();
         }
     }
 }
