@@ -1,7 +1,7 @@
-﻿using BulkyWeb.Models;
+﻿using Bulky.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyWeb.Data
+namespace Bulky.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -21,7 +21,7 @@ namespace BulkyWeb.Data
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 });
         }
-       
+
     }
 
 }
