@@ -8,7 +8,7 @@ namespace BulkyWebRazor_Temp.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
             
-      public DbSet<Category> categories { get; set; }
+      public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

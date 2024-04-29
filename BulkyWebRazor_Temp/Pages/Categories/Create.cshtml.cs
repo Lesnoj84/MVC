@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BulkyWebRazor_Temp.Pages.Categories
 {
-    public class IndexModel : PageModel
+    public class CreateModel : PageModel
     {
-        public readonly ApplicationDbContext _db;
-        public List<Category> CategoryList { get; set; }
-        public IndexModel(ApplicationDbContext db)
+        private readonly ApplicationDbContext _db;
+        public Category Category { get; set; }
+        public CreateModel(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public void OnGet()
         {
-            CategoryList = _db.Categories.ToList();
+            
         }
     }
 }

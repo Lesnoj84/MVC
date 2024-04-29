@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDatabase")));
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddMvc().AddRazorPagesOptions(option => { option.Conventions.AddPageRoute("/categories/Index", ""); });
 
 var app = builder.Build();
 
