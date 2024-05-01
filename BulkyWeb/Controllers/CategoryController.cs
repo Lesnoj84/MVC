@@ -1,4 +1,5 @@
 ﻿using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,16 +8,16 @@ namespace BulkyWeb.Controllers;
 
 public class CategoryController : Controller
 {
-    private readonly ApplicationDbContext _db;
-    public CategoryController(ApplicationDbContext db)
+    private readonly ICategoryRepository _categoryRepo;
+    public CategoryController(ICategoryRepository db)
     {
-        _db = db;
+        _categoryRepo = db;
 
     }
 
     public IActionResult Index()
     {
-        List<Category> objCategoryList = _db.Categories.ToList();
+        List<Category> objCategoryList = _categoryRepo.GetAll();
 
         return View(objCategoryList);
     }
@@ -36,8 +37,8 @@ public class CategoryController : Controller
         ModelState.Remove("Id");
         if (obj != null && ModelState.IsValid) //ModelState.IsValid controlls if Category validation is valid.
         {
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
+            _categoryRepo.Add(obj);
+            _categoryRepo.Save();
             TempData["success"] = "Category created successfully";
             return RedirectToAction("Index"); //return RedirectToAction("Index",Category); or other controller if needed.
 
@@ -48,7 +49,7 @@ public class CategoryController : Controller
 
     public IActionResult Edit(int? id)
     {
-        var categoryFromDb = _db.Categories.FirstOrDefault(c => c.Id == id);
+        var categoryFromDb = _categoryRepo.Get(x=>x.Id==id);
 
         if (id == null || id == 0 || categoryFromDb == null)
         {
@@ -65,8 +66,8 @@ public class CategoryController : Controller
 
         if (obj != null && ModelState.IsValid) //ModelState.IsValid controlls if Category validation is valid.
         {
-            _db.Categories.Update(obj);
-            _db.SaveChanges();
+            _categoryRepo.Update(obj);
+            _categoryRepo.Save();
             TempData["success"] = "Category updated successfully";
             return RedirectToAction("Index"); //return RedirectToAction("Index",Category); or other controller if needed.
 
@@ -76,7 +77,7 @@ public class CategoryController : Controller
 
     public IActionResult Delete(int? id)
     {
-        var categoryFromDb = _db.Categories.FirstOrDefault(c => c.Id == id);
+        var categoryFromDb = _categoryRepo.Get(c => c.Id == id);
 
         if (id == null || id == 0 || categoryFromDb == null)
         {
@@ -88,8 +89,8 @@ public class CategoryController : Controller
     [HttpPost] // Important without it the page wont know what method to use => ERROR
     public IActionResult Delete(Category obj)
     {
-        _db.Categories.Remove(obj);
-        _db.SaveChanges();
+        _categoryRepo.Remove(obj);
+        _categoryRepo.Save();
         TempData["success"] = "Category deleted successfully";
         return RedirectToAction("Index"); //return RedirectToAction("Index",Category); or other controller if needed.
     }

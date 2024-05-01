@@ -1,6 +1,6 @@
 ﻿using ConsoleApp.Interfaces;
 
-namespace ConsoleApp.Classes
+namespace ConsoleApp
 {
     internal class Cat : IAnimal
     {

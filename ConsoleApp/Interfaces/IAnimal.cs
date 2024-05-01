@@ -2,6 +2,6 @@
 {
     internal interface IAnimal
     {
-        void MakeSound();
+         void MakeSound() { }
     }
 }

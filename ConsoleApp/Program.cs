@@ -1,40 +1,26 @@
-﻿namespace ConsoleApp
+﻿using ConsoleApp.Classes;
+using ConsoleApp.Interfaces;
+
+namespace ConsoleApp;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Enter File name");
+        Cat cat = new ("Kitty",25);
+        Dog dog = new ("Bogo",5);
 
-            string path = "C:\\Users\\Vitalij\\OneDrive - Auspi Europe s.r.o\\Dokumenty";
-
-            string fileName = Console.ReadLine();
-
-            Search(path, fileName);
-
-        }
-
-        static void Search(string path, string fileName)
-        {
+        Animal animal = new Animal();
 
 
-            var directory = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
-            List<string> result = new List<string>();
+        animal.MakeSound(cat);
 
-            foreach (string dir in directory)
-            {
-                if (Path.GetFileNameWithoutExtension(dir).ToLower().Contains(fileName))
-                {
-                    result.Add(dir);
-                }
-            }
 
-            foreach (string dir in result)
-            {
-                Console.WriteLine(dir);
-            }
 
-        }
+      
+        
+
 
     }
 }
+   
