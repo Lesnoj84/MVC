@@ -11,6 +11,5 @@ namespace BulkyBook.DataAccess.Repository.IRepository
     {
         void Update(Category category); //Update and Save method might have different implemintation for other classe
                                         // so its good to make it in a seperate interface, like ICaterogryRepository.
-        void Save();
     }
 }

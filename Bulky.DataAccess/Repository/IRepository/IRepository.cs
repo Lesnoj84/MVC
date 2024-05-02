@@ -9,7 +9,7 @@ namespace BulkyBook.DataAccess.Repository.IRepository
 {
     public interface IRepository<T> where T : class //Method Holder
     {
-        //T-Category
+        //T can be all kind of obj like Category or Product ect...
         List<T> GetAll();
         T Get(Expression<Func<T, bool>> filter);
         void Add(T entity);

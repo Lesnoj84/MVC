@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html> 
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/BulkyBookWeb.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
- 
+
 
 </head>
 <body>
@@ -24,13 +24,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Category" asp-action="Index">Category</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Content Managment
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"  asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a></li>
+                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Product" asp-action="Index">Products</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -39,12 +48,13 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <partial name="_Notifications" />
             @RenderBody()
+            @*  <partial name="_Notifications" /> *@
+
         </main>
     </div>
 
-    <footer class="border-bottom footer text-muted bg-primary text-center" >
+    <footer class="footer border-bottom text-muted bg-primary text-center">
         <div class="container text-light">
             &copy; 2024 - BulkyBookWeb made with <i class="bi bi-heart-fill"></i>
         </div>
