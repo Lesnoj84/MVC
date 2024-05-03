@@ -1,0 +1,82 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<div class="card shadow border-0 my-5">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text text-white py-2">@ViewData["Title"]</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div>
+                <input asp-for="Id" hidden />
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3 row pt-1">
+                <label asp-for="Title" class="pt-0" style="font-weight:600"></label> @*asp-for displays name of category parameters.*@
+                <input asp-for="Title" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pt-1">
+                <label asp-for=Author class="pt-0" style="font-weight:600"></label>
+                <input asp-for="Author" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pt-1">
+                <label asp-for="ISBN" class="pt-0" style="font-weight:600"></label>
+                <input asp-for="ISBN" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pt-1">
+                <label asp-for=Description class="pt-0" style="font-weight:600"></label>
+                <textarea asp-for="Description" class="text-dark form-control border-dark bg-light bg-opacity-10"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pt-1">
+                <label asp-for="ListPrice" class="pt-0" style="font-weight:600"></label>
+                <input asp-for="ListPrice" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                <span asp-validation-for="ListPrice" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pt-1">
+                <label asp-for=Price class="pt-0" style="font-weight:600"></label>
+                <input asp-for="Price" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pt-1">
+                <label asp-for=Price50 class="pt-0" style="font-weight:600"></label>
+                <input asp-for="Price50" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                <span asp-validation-for="Price50" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pt-1">
+                <label asp-for=Price100 class="pt-0" style="font-weight:600"></label>
+                <input asp-for="Price100" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                <span asp-validation-for="Price100" class="text-danger"></span>
+            </div>
+           
+            <div class="mb-3 row pt-1">
+                <label asp-for="CategoryId" class="pt-0" style="font-weight:600"></label>
+                <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="text-dark form-select border-dark bg-light bg-opacity-10">
+                    <option display selected>--Select Category--</option>
+                </select>
+
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class=" row col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                </div>
+                <div class=" col-6 col-md-3">
+                    <button asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
