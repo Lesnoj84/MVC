@@ -1,5 +1,7 @@
 ﻿using ConsoleApp.Classes;
 using ConsoleApp.Interfaces;
+using System.Diagnostics;
+using static ConsoleApp.Classes.DatabaseSample;
 
 namespace ConsoleApp;
 
@@ -7,32 +9,36 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        //Cat cat = new ("Kitty",25);
-        //Dog dog = new ("Bogo",5);
-        //Animal animal = new Animal();
-        //animal.MakeSound(cat);
-
-        Category category = new Category();
-        var myArr = category.Categories;
-        myArr[0] = new Category { Id = 1, Name = "Action", DisplayOrder = 1 };
-        myArr[1] = new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 };
-        myArr[2] = new Category { Id = 3, Name = "History", DisplayOrder = 3 };
-
-        //IEnumerable<Category> categories = myArr;
-        foreach (var item in myArr.Where(u=>u.Name.ToLower().Contains("s")))
-        {
-            Console.WriteLine(item.Name);
-        }
 
 
+
+       
     }
+    #region IQueryable & IEnumerable
+    //DatabaseSample databaseSample = new DatabaseSample();
 
-    public class Category
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int DisplayOrder { get; set; }
-        public Category[] Categories { get; set; } = new Category[3];
-    }
+    //Stopwatch swIQ = Stopwatch.StartNew();
+
+    //IQueryable<Client> clients = databaseSample.CreateClients(20).AsQueryable();
+
+    //foreach (var client in clients.Where(c=>c.Age>32))
+    //{
+
+    //    Console.WriteLine("Name: {0}, Age: {1}, Occupation: {2}",client.Name,client.Age, client.Occupation);
+    //}
+    //swIQ.Stop();
+    //Console.WriteLine("IQueryable took {0} to build", swIQ.ElapsedMilliseconds);
+
+
+    //Stopwatch swIE = Stopwatch.StartNew();
+
+    //IEnumerable<Client> servers = databaseSample.CreateClients(20);
+    //foreach (var item in servers.Where(c=>c.Age>32))
+    //{
+    //    Console.WriteLine("Name: {0}, Age: {1}, Occupation: {2}", item.Name, item.Age, item.Occupation);
+    //}
+    //swIE.Stop();
+    //Console.WriteLine("IEnumerable took {0} to build", swIE.ElapsedMilliseconds);
+    #endregion
 }
 
