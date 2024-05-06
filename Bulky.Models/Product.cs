@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +15,7 @@ public class Product
     public string? Title { get; set; }
     
     
-    [Required]
+    [Required, ValidateNever]
     public string? Description { get; set; }
     
     
@@ -44,10 +45,10 @@ public class Product
     public int CategoryId { get; set; }
 
 
-    [ForeignKey("CategoryId")]
-    public Category? Category { get; set; }
-
+    [ForeignKey("CategoryId"),ValidateNever]
+    public Category? Category { get; set; } 
     public string? ImageURL { get; set; }
 
+    
 
 }

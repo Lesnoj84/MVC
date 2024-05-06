@@ -16,6 +16,7 @@ public class Repository<T> : IRepository<T> where T : class //Repository class i
     {
         _db = db;
         dbSet = _db.Set<T>(); //Set is an method that is in-build in DdContext class to set T as a class.
+        //_db.Products.Include(u => u.Category);
     }
 
   
@@ -25,15 +26,32 @@ public class Repository<T> : IRepository<T> where T : class //Repository class i
         dbSet.Add(entity);
     }
 
-    public T Get(Expression<Func<T, bool>> filter)
+    public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
     {
         IQueryable<T> values = dbSet.Where(filter);
+        
+        if (!string.IsNullOrEmpty(includeProperties))
+        {
+            foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                values = values.Include(item);
+            }
+        }
         return  values.FirstOrDefault();
     }
 
-    public List<T> GetAll()
+    public IEnumerable<T> GetAll(string? includeProperties = null)
     {
         IQueryable<T> values = dbSet;
+        if (!string.IsNullOrEmpty(includeProperties))
+        {
+            values = values.Include(includeProperties);
+
+            //foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            //{
+            //    values = values.Include(item);
+            //}
+        }
 
         return values.ToList();
     }
