@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Product List";
 }
+<partial name="_Notifications" />
+
+<form class="d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
 <div class="card shadow border-0 mt-4 ">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -12,23 +18,30 @@
             </div>
         </div>
     </div>
+
+    <form class="d-flex align-self-end m-1" style="width:400px" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+
     <div class="card-body p-2">
         <div class="col-12 text-end mt-2">
             <a class="btn btn-primary mb-2" asp-controller="Product" asp-action="CreateOrUpdate"><i class="bi bi-plus-circle me-2"></i> Create New Category</a>
         </div>
 
-        <table class="table table-bordered table-striped border">
+        <table id="tblData" class="table table-bordered table-striped border" style="width:100%">
+          
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>ID</th>
+                    <th>ISBN</th>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>ISBN</th>
                     <th>Price</th>
                     <th>Cathegory</th>
                 </tr>
             </thead>
-            <tbody>
+            @* <tbody>
                 @foreach (var item in Model.OrderBy(u=>u.Title) )
                 {
                     <tr>
@@ -47,7 +60,10 @@
 
                     </tr>
                 }
-            </tbody>
+            </tbody> *@
         </table>
     </div>
 </div>
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}

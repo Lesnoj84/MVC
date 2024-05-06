@@ -64,33 +64,58 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                         System.IO.File.Delete(oldImgPath);
                     }
                 }
-
-                using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
-                }
-                productVM.Product.ImageURL = @"\images\product\" + fileName;
-
-
-                if (productVM.Product.Id == 0)
-                {
-                    _unitOfWork.Product.Add(productVM.Product);
-                }
                 else
                 {
-                    _unitOfWork.Product.Update(productVM.Product);
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    productVM.Product.ImageURL = @"\images\product\" + fileName;
                 }
-                _unitOfWork.Save();
-                TempData["success"] = "Category created successfully";
-                return RedirectToAction("Index");
+
+                if (productVM.Product.Id == 0 && ModelState.IsValid)
+                {
+                    productVM.Product.Description = string.Empty;
+                    _unitOfWork.Product.Add(productVM.Product);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Category created successfully";
+                    return RedirectToAction("Index");
+                }
+                else if (ModelState.IsValid)
+                {
+                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Category updated successfully";
+                    return RedirectToAction("Index");
+                }
+                return View(productVM);
+                
+                
             }
             else
             {
                 productVM.CategoryList = _unitOfWork.Category.GetAll().Select(
                 u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
-                _unitOfWork.Product.Update(productVM.Product);
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
+             
+
+                if (productVM.Product.Id == 0 && ModelState.IsValid)
+                {
+                    productVM.Product.Description = string.Empty;
+                    _unitOfWork.Product.Add(productVM.Product);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Category created successfully";
+                    return RedirectToAction("Index");
+                }
+                else if(ModelState.IsValid)
+                {
+                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Category updated successfully";
+                    return RedirectToAction("Index");
+                }
+                return View(productVM);
+                
             }
 
 
@@ -143,5 +168,15 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             return View();
         }
+
+        #region API Calls
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            List<Product> products = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            return Json( new { data = products });
+        }
+
+        #endregion
     }
 }

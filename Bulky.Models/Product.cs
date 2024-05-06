@@ -15,7 +15,7 @@ public class Product
     public string? Title { get; set; }
     
     
-    [Required, ValidateNever]
+    [Required ,ValidateNever]
     public string? Description { get; set; }
     
     

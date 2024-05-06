@@ -22,20 +22,13 @@
             <div class="mb-3 row pt-1">
                 <label asp-for=Title class="pt-0" style="font-weight:600"></label> @*asp-for displays name of category parameters.*@
                 <input asp-for="Title" class="text-dark form-control border-dark bg-dark bg-opacity-10" disabled />
-                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="mb-3 row pt-1">
                 <label asp-for=Author class="pt-0" style="font-weight:600"></label>
                 <input asp-for="Author" class=" text-dark form-control border-dark bg-dark bg-opacity-10" disabled />
-                <span asp-validation-for="Author" class="text-danger"></span>
 
             </div>
-            <div class="mb-3 row pt-1">
-                <label asp-for="Description" class="pt-0" style="font-weight:600"></label>
-                <input asp-for="Description" class=" text-dark form-control border-dark bg-dark bg-opacity-10" disabled />
-                <span asp-validation-for="Description" class="text-danger"></span>
-
-            </div>
+            
             <div class="row justify-content-center">
                 <div class=" row col-md-3">
                     <button type="submit" class="btn btn-danger form-control">Delete</button>

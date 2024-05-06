@@ -45,9 +45,10 @@
 
                     <div class="mb-3 row pt-1">
                         <label asp-for="Product.Description" class="pt-0" style="font-weight:600"></label>
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                        <div class="border-1 border-dark" id="editor-container" style="height: 300px;"></div>
+                        <textarea asp-for="Product.Description" id="description" style="display:none ;"></textarea>
                     </div>
-                    <div class="border-1 border-dark" id="editor-container" style="height: 300px;"></div>
-                    <textarea asp-for="Product.Description" id="description" style="display:none ;"></textarea>
 
                     <div class="mb-3 row pt-1">
                         <label asp-for="Product.ListPrice" class="pt-0" style="font-weight:600"></label>
@@ -100,10 +101,10 @@
                     </div>
                 </div>
                 <div class="col-5">
-                    <img src="@Model.Product.ImageURL" width="100%" style="border-radius:5px;border:1px solid #bbb9b9"/>
+                    <img src="@Model.Product.ImageURL" width="100%" style="border-radius:5px;border:1px solid #bbb9b9" />
                 </div>
             </div>
-           
+
         </form>
     </div>
 </div>

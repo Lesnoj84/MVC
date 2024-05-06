@@ -40,17 +40,18 @@ public class Repository<T> : IRepository<T> where T : class //Repository class i
         return  values.FirstOrDefault();
     }
 
+    //Include can have multiple inputs like "Category,CoverType,ect" thats why we need to make comma seperator: necw char[]{','}.
     public IEnumerable<T> GetAll(string? includeProperties = null)
     {
         IQueryable<T> values = dbSet;
         if (!string.IsNullOrEmpty(includeProperties))
         {
-            values = values.Include(includeProperties);
+            //values = values.Include(includeProperties);
 
-            //foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            //{
-            //    values = values.Include(item);
-            //}
+            foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+               values = values.Include(item);
+            }
         }
 
         return values.ToList();
