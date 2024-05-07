@@ -178,6 +178,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         //    return View();
         //}
 
+        [HttpDelete]
         public ActionResult Delete(int id)
         {
             if (id >= 0)
