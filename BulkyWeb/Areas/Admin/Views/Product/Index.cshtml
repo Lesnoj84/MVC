@@ -5,23 +5,21 @@
 }
 <partial name="_Notifications" />
 
-<form class="d-flex" role="search">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
-</form>
 
-<div class="card shadow border-0 mt-4 ">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 ">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text text-white py-2">@ViewData["Title"]</h2>
+                <h2 class="text text-white ">@ViewData["Title"]</h2>
             </div>
         </div>
     </div>
 
-    <form class="d-flex align-self-end m-1" style="width:400px" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+    <form asp-controller="Product" asp-action="Index" class="d-flex align-self-end m-1" style="width:400px" role="search">
+        <input class="form-control me-2" type="search" name="SearchString" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-secondary ms-1" type="submit" asp-controller="Product" asp-action="Refresh"><i class="bi bi-arrow-clockwise"></i></button>
     </form>
 
     <div class="card-body p-2">
@@ -30,27 +28,27 @@
         </div>
 
         <table id="tblData" class="table table-bordered table-striped border" style="width:100%">
-          
+
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>ISBN</th>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>Price</th>
                     <th>Cathegory</th>
+                    <th>Price</th>
+                    <th>ISBN</th>
                 </tr>
             </thead>
-            @* <tbody>
-                @foreach (var item in Model.OrderBy(u=>u.Title) )
+            <tbody>
+                @foreach (var item in Model.OrderBy(u => u.Title))
                 {
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.Title</td>
                         <td>@item.Author</td>
-                        <td>@item.ISBN</td>
+                        <td>@item.Category!.Name</td>
                         <td>@item.ListPrice</td>
-                        <td>@item.Category.Name</td>
+                        <td>@item.ISBN</td>
                         <td class="align-middle">
                             <div class=" d-flex justify-content-center align-items-center w-100" role="group">
                                 <a class="btn btn-primary mx-2" asp-controller="Product" asp-action="CreateOrUpdate" asp-route-id="@item.Id"><i class="bi bi-pencil-fill me-2"></i>Edit</a>
@@ -60,10 +58,11 @@
 
                     </tr>
                 }
-            </tbody> *@
+            </tbody>
         </table>
     </div>
 </div>
-@section Scripts{
-    <script src="~/js/product.js"></script>
+
+@section Scripts {
+
 }

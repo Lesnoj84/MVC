@@ -4,6 +4,7 @@ using BulkyBook.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Evaluation;
+using System.Collections;
 
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
@@ -20,13 +21,40 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index() //Method that make a list of items and shows on the Index page
+        public async Task<IActionResult> Index(string? SearchString = null) //Method that make a list of items and shows on the Index page
         {
-            List<Product> productsList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            List<Product> productsList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+
+
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+
+                var result = _unitOfWork.Product.GetAll().Where(s => s.Title!.Contains(SearchString));
+
+                if (result.Any())
+                {
+                    productsList.Clear();
+                    productsList.AddRange(result);
+                    return View(productsList);
+                }
+                else
+                {
+                    TempData["error"] = "Not found";
+                    return RedirectToAction("Index");
+                }
+            }
 
             return View(productsList);
         }
 
+        [HttpPost]
+        public IActionResult Refresh()
+        {
+            List<Product> productsList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+
+            return RedirectToAction("Index", productsList);
+        }
         public IActionResult CreateOrUpdate(int? id) //Method that shows the page
         {
             //Creating ProductVM so we can pass several parameters from different classes.
@@ -90,14 +118,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
                 return View(productVM);
-                
-                
+
+
             }
             else
             {
                 productVM.CategoryList = _unitOfWork.Category.GetAll().Select(
                 u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
-             
+
 
                 if (productVM.Product.Id == 0 && ModelState.IsValid)
                 {
@@ -107,15 +135,19 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     TempData["success"] = "Category created successfully";
                     return RedirectToAction("Index");
                 }
-                else if(ModelState.IsValid)
+                else if (ModelState.IsValid)
                 {
+                    if (productVM.Product.Description == null)
+                    {
+                        productVM.Product.Description = string.Empty;
+                    }
                     _unitOfWork.Product.Update(productVM.Product);
                     _unitOfWork.Save();
                     TempData["success"] = "Category updated successfully";
                     return RedirectToAction("Index");
                 }
                 return View(productVM);
-                
+
             }
 
 
@@ -173,8 +205,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            List<Product> products = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
-            return Json( new { data = products });
+            List<Product> products = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            return Json(new { data = products });
         }
 
         #endregion
