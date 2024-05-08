@@ -20,7 +20,7 @@
     <form asp-controller="Product" asp-action="Index" class="d-flex align-self-end m-1" style="width:400px" role="search">
         <input class="form-control me-2" type="search" name="SearchString" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-        <button class="btn btn-secondary ms-1" type="submit" asp-controller="Product" asp-action="Refresh"><i class="bi bi-arrow-clockwise"></i></button>
+        <button class="btn btn-secondary ms-1" type="submit" asp-controller="Product" asp-action="Refresh" title="Refresh Form"><i class="bi bi-arrow-clockwise"></i></button>
     </form>
 
     <div class="card-body p-2">
@@ -54,7 +54,7 @@
                             <div class=" d-flex justify-content-center align-items-center w-100" role="group">
                                 <a class="btn btn-primary mx-2" asp-controller="Product" asp-action="CreateOrUpdate" asp-route-id="@item.Id"><i class="bi bi-pencil-fill me-2"></i>Edit</a>
                                 @* <a class="btn btn-danger mx-2" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3 me-2"></i>Delete</a> *@
-                                <button class="btn btn-danger mx-2" onclick="confirmDelete('/admin/product/delete/${data}')"> <i class="bi bi-trash-fill"></i> Delete</button>
+                                <button class="btn btn-danger mx-2" onclick="confirmDelete('/admin/product/delete/${data}','@item.Title')"> <i class="bi bi-trash-fill"></i> Delete</button>
                             </div>
                         </td>
 
@@ -67,9 +67,9 @@
 
 @section Scripts {
     <script>
-        function confirmDelete(url) {
+        function confirmDelete(url,text) {
             Swal.fire({
-                title: 'Are you sure?',
+                title: `Are you sure you want to delete ${text}?`,
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
