@@ -1,4 +1,3 @@
-var dataTable;
 
 //$(document).ready(function () {
 //    loadDataTable();
@@ -25,4 +24,34 @@ var dataTable;
 //    });
 //}
 
+function confirmDelete(url, text) {
+    Swal.fire({
+        title: `Are you sure you want to delete ${text}?`,
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#CA1929',
+        cancelButtonColor: '#192E2F',
+        cancelButtonText: 'No',
+        confirmButtonText: 'Yes!'
+    }).then((result) => {
+        if (result.isConfirmed) {            
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                success: function (data) {
+                   
+                    toastr.success(data.message);
+                    setTimeout(function () {
+                        window.location.href = '/admin/product'; // Adjust the URL as needed
+                    }, 500);
+                },
+                error: function (xhr, status, error) {
+                    // On error, show error message with Toastr
+                    toastr.error('An error occurred while deleting.');
+                }
+            });
+        }
+    });
+}
 

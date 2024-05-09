@@ -29,16 +29,67 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(SearchString))
             {
+                bool hasFound = false;
+              
+                productsList.Clear();
 
-                var result = _unitOfWork.Product.GetAll().Where(s => s.Title!.Contains(SearchString));
-
-                if (result.Any())
+                foreach (var item in _unitOfWork.Product.GetAll())
                 {
+                    if (item.Title!.ToLower().Contains(SearchString.ToLower()))
+                    {
+                        var result = _unitOfWork.Product.GetAll().Where(s => s.Title!.ToLower().Contains(SearchString.ToLower()));
+
+                        productsList.AddRange(result);
+                        hasFound = true;
+
+
+                    }
+                    else if (item.Author!.ToLower().Contains(SearchString.ToLower()))
+                    {
+                        var result = _unitOfWork.Product.GetAll().Where(s => s.Author!.ToLower().Contains(SearchString.ToLower()));
+
+                        productsList.AddRange(result);
+                        hasFound = true;
+
+                    }
+                    else if (item.Category!.Name!.ToLower().Contains(SearchString.ToLower()))
+                    {
+                        var result = _unitOfWork.Product.GetAll().Where(s => s.Category!.Name!.ToLower().Contains(SearchString.ToLower()));
+
+                        productsList.AddRange(result);
+                        hasFound = true;
+                       
+
+                    }
+                    else if (item.ISBN!.ToLower().Contains(SearchString.ToLower()))
+                    {
+                        var result = _unitOfWork.Product.GetAll().Where(s => s.ISBN!.ToLower().Contains(SearchString.ToLower()));
+
+                        productsList.AddRange(result);
+                        hasFound = true;
+
+                    }
+                    else if (item.Id.ToString().ToLower()!.Contains(SearchString.ToLower()))
+                    {
+                        var result = _unitOfWork.Product.GetAll().Where(s => s.Id!.ToString().ToLower().Contains(SearchString.ToLower()));
+
+                        productsList.AddRange(result);
+                        hasFound = true;
+
+                    }
+
+                }
+                if (hasFound)
+                {
+                    List<Product> tempList = [.. productsList];
+
                     productsList.Clear();
-                    productsList.AddRange(result);
+                                        
+                    productsList = tempList.DistinctBy(s =>s.Title).ToList();
+                    
                     return View(productsList);
                 }
-                else
+                else if (hasFound == false)
                 {
                     TempData["error"] = "Not found";
                     return RedirectToAction("Index");
@@ -181,26 +232,36 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            if (id >= 0)
+            var productFromDb = _unitOfWork.Product.Get(p => p.Id == id);
+
+            if (productFromDb!=null)
             {
-                var productFromDb = _unitOfWork.Product.Get(p => p.Id == id);
-                return View(productFromDb);
+                    _unitOfWork.Product.Remove(productFromDb);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Category deleted successfully";
+
+                return Json(new { success = true, message = "Product deleted successfully" });
+
             }
-            return View();
+            else
+            {
+                return View(productFromDb);
+
+            }
         }
 
-        [HttpPost]
-        public IActionResult Delete(Product product)
-        {
-            if (product != null)
-            {
-                _unitOfWork.Product.Remove(product);
-                _unitOfWork.Save();
-                TempData["success"] = "Category deleted successfully";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+        //[HttpDelete]
+        //public IActionResult Delete(Product product)
+        //{
+        //    if(product!=null)
+        //    {
+        //        _unitOfWork.Product.Remove(product);
+        //        _unitOfWork.Save();
+        //        TempData["success"] = "Category deleted successfully";
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
 
         #region API Calls
         [HttpGet]
