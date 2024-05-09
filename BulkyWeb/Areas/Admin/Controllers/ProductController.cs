@@ -30,7 +30,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(SearchString))
             {
                 bool hasFound = false;
-              
+
                 productsList.Clear();
 
                 foreach (var item in _unitOfWork.Product.GetAll())
@@ -58,7 +58,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
                         productsList.AddRange(result);
                         hasFound = true;
-                       
+
 
                     }
                     else if (item.ISBN!.ToLower().Contains(SearchString.ToLower()))
@@ -84,9 +84,9 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     List<Product> tempList = [.. productsList];
 
                     productsList.Clear();
-                                        
-                    productsList = tempList.DistinctBy(s =>s.Title).ToList();
-                    
+
+                    productsList = tempList.DistinctBy(s => s.Title).ToList();
+
                     return View(productsList);
                 }
                 else if (hasFound == false)
@@ -143,15 +143,13 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                         System.IO.File.Delete(oldImgPath);
                     }
                 }
-                else
-                {
 
-                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                    productVM.Product.ImageURL = @"\images\product\" + fileName;
+                using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+
                 }
+                productVM.Product.ImageURL = @"\images\product\" + fileName;
 
                 if (productVM.Product.Id == 0 && ModelState.IsValid)
                 {
@@ -234,11 +232,11 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         {
             var productFromDb = _unitOfWork.Product.Get(p => p.Id == id);
 
-            if (productFromDb!=null)
+            if (productFromDb != null)
             {
-                    _unitOfWork.Product.Remove(productFromDb);
-                    _unitOfWork.Save();
-                    TempData["success"] = "Category deleted successfully";
+                _unitOfWork.Product.Remove(productFromDb);
+                _unitOfWork.Save();
+                TempData["success"] = "Category deleted successfully";
 
                 return Json(new { success = true, message = "Product deleted successfully" });
 
