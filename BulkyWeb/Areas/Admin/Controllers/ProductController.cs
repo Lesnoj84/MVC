@@ -201,33 +201,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
             }
 
-
         }
-
-        //public IActionResult Edit(int id)
-        //{
-        //    var productFromDb = _unitOfWork.Product.Get(p => p.Id == id);
-
-        //    if (productFromDb != null || id > 0)
-        //    {
-        //        return View(productFromDb);
-        //    }
-        //    return NotFound();
-        //}
-
-        //[HttpPost]
-        //public IActionResult Edit(Product product)
-        //{
-
-        //    if (product != null)
-        //    {
-        //        _unitOfWork.Product.Update(product);
-        //        _unitOfWork.Save();
-        //        TempData["success"] = "Category updated successfully";
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
 
         [HttpDelete]
         public ActionResult Delete(int id)
@@ -249,19 +223,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
             }
         }
-
-        //[HttpDelete]
-        //public IActionResult Delete(Product product)
-        //{
-        //    if(product!=null)
-        //    {
-        //        _unitOfWork.Product.Remove(product);
-        //        _unitOfWork.Save();
-        //        TempData["success"] = "Category deleted successfully";
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
 
         #region API Calls
         [HttpGet]
