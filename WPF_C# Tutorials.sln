@@ -63,6 +63,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{712AB4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JavaScript", "JavaScript", "{C1ED8CA0-6BF8-41A5-8171-5C32BEBDCC75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempConverter", "TempConverter\TempConverter.csproj", "{ACE95AEE-1AD5-459F-9A07-9559B0FAFB1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +152,10 @@ Global
 		{02641D92-C1C6-43E2-9209-5E5F126B19EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02641D92-C1C6-43E2-9209-5E5F126B19EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02641D92-C1C6-43E2-9209-5E5F126B19EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACE95AEE-1AD5-459F-9A07-9559B0FAFB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACE95AEE-1AD5-459F-9A07-9559B0FAFB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACE95AEE-1AD5-459F-9A07-9559B0FAFB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACE95AEE-1AD5-459F-9A07-9559B0FAFB1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,6 +188,7 @@ Global
 		{02641D92-C1C6-43E2-9209-5E5F126B19EE} = {BCFB116E-F0F1-4216-B149-A3FF83FCC727}
 		{712AB453-6055-421C-8B23-AF494816BBC5} = {FF9449C6-F931-4E2D-90D3-1EE26A108AFB}
 		{C1ED8CA0-6BF8-41A5-8171-5C32BEBDCC75} = {FF9449C6-F931-4E2D-90D3-1EE26A108AFB}
+		{ACE95AEE-1AD5-459F-9A07-9559B0FAFB1D} = {712AB453-6055-421C-8B23-AF494816BBC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CC9079E-E282-4FD7-868E-1D39C34D98F6}

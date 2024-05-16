@@ -1,0 +1,86 @@
+﻿@page "/temperature_converter"
+@rendermode InteractiveServer
+
+
+<form class="container">
+    <div class="card col-sm-6 col-12">
+        <div class="card-header">
+            <h1 class="text-primary text-center">Temperature Converter</h1>
+        </div>
+        <div class="card-body">
+            <div class="col-4 d-block">
+                <label class="mb-2 text-center">Temperature Input</label>
+                <input name="inputText" @bind="inputValue" type="number" class="text-center border-1 rounded" />
+            </div>
+
+            <div class="mt-4">
+                <input type="radio" class="me-2" name="radioBtns" value="1" checked="@(()=>CelsiuseToFarenheit = 1)"  @onclick="(()=>CelsiuseToFarenheit=1)"/>
+                <label>Celsius > Fahrenheit</label><br />
+                <input type="radio" class="me-2" name="radioBtns" value="2"  @onclick="(()=>FarenheitToCeliuse=2)" />
+                <label>Fahrenheit > Celsius</label>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" class=" btn btn-primary mt-4 w-50" @onclick=ShowResult> Convert </button>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                @if (wasClicked)
+                {
+                    <h3 class="mt-5">@result</h3>
+                }
+
+            </div>
+
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+
+</form>
+
+@code {
+    double inputValue;
+
+    int CelsiuseToFarenheit = 0;
+    int FarenheitToCeliuse = 0;
+
+
+
+    private string result = string.Empty;
+    bool wasClicked = false;
+
+    public void ShowResult()
+    {
+
+        if (CelsiuseToFarenheit == 1)
+        {
+            result = ((inputValue * 9 / 5) + 32).ToString("0.00") + " °C";
+
+            inputValue = 0;
+            CelsiuseToFarenheit = 0;
+            wasClicked = true;
+
+        }
+        else if(FarenheitToCeliuse==2)
+        {
+            result = ((inputValue - 32) * 5 / 9).ToString("0.00") + " °C";
+            FarenheitToCeliuse = 0;
+            wasClicked = true;
+
+        }
+        else
+        {
+            result = "Not Selected";
+            wasClicked = true;
+        }
+
+
+
+    }
+
+
+}
+
+
+        @* checked="@(CelsiuseToFarenheit==1)" *@ 
+        @* checked="@(FarenheitToCeliuse==2)" *@
