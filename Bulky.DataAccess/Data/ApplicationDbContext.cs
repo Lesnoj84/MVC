@@ -15,6 +15,8 @@ namespace BulkyBook.DataAccess.Data
         //Parameter for the database and to make database 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
 
 
         //Method that is provided by Db entityFrameWork to fill manually the databse
