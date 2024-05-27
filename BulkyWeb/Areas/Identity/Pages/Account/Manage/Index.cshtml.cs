@@ -6,7 +6,11 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using BulkyBook.DataAccess.Data;
+using BulkyBook.DataAccess.Repository.IRepository;
+using BulkyBook.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,13 +20,17 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+       
+        private readonly IUnitOfWork _unitOfWork;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
+            
         }
 
         /// <summary>
@@ -58,6 +66,13 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public string? Name { get; set; }
+            public string? StreetName { get; set; }
+            public string? City { get; set; }
+            public string? State { get; set; }
+            public string? PostalCode { get; set; }
+
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -65,14 +80,25 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName;
+            var getUserFromDb = _unitOfWork.ApplicationUser.Get(u => u.Id == user.Id);
 
-            Input = new InputModel
+
+            if (userName != null)
             {
-                PhoneNumber = phoneNumber
-            };
-        }
+                Input = new InputModel
+                {
+                    Name = getUserFromDb.Name,
+                    PhoneNumber = phoneNumber,
+                    City = getUserFromDb.City,
+                    StreetName = getUserFromDb.StreetName,
+                    PostalCode = getUserFromDb.PostalCode,
+                    State   = getUserFromDb.State,
 
+                };
+
+            }
+            Username = userName;
+        }
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -88,6 +114,9 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+
+            var getUserFromDb = _unitOfWork.ApplicationUser.Get(u => u.Id == user.Id);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -103,6 +132,10 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+
+                getUserFromDb.PhoneNumber = Input.PhoneNumber;
+
+
                 if (!setPhoneResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
@@ -111,8 +144,19 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
+
+            getUserFromDb.Name = Input.Name;
+            getUserFromDb.StreetName = Input.StreetName;
+            getUserFromDb.City  = Input.City;
+            getUserFromDb.PostalCode = Input.PostalCode;
+            getUserFromDb.State = Input.State;
+
+            _unitOfWork.ApplicationUser.Update(getUserFromDb);
+            _unitOfWork.Save();
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+
+
     }
 }

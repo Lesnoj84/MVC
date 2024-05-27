@@ -1,0 +1,71 @@
+﻿@model List<Company>;
+@{
+    ViewData["Title"] = "Company List";
+}
+
+<title>@ViewData["Title"]</title>
+<partial name="_Notifications" />
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 ">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text text-white ">@ViewData["Title"]</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <form asp-controller="Company" asp-action="Index" class="d-flex align-self-end m-1" style="width:400px" role="search">
+        <input class="form-control me-2" type="search" name="SearchString" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-secondary ms-1" type="submit" asp-controller="Company" asp-action="Refresh" title="Refresh Form"><i class="bi bi-arrow-clockwise"></i></button>
+    </form>
+
+    <div class="card-body p-2">
+        <div class="col-12 text-end mt-2">
+            <a class="btn btn-primary mb-2" asp-controller="Company" asp-action="CreateOrUpdate"><i class="bi bi-plus-circle me-2"></i> Create New Company</a>
+        </div>
+
+        <table id="tblData" class="table table-bordered table-striped border" style="width:100%">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Cathegory</th>
+                    <th>Price</th>
+                    <th>ISBN</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderBy(u => u.Name))
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.StreetAdress</td>
+                        <td>@item.City</td>
+                        <td>@item.State</td>
+                        <td class="align-middle">
+                            <div class=" d-flex justify-content-center align-items-center w-100" role="group">
+                                <a class="btn btn-primary mx-2" asp-controller="Company" asp-action="CreateOrUpdate" asp-route-id="@item.Id"><i class="bi bi-pencil-fill me-2"></i>Edit</a>
+                                @* <a class="btn btn-danger mx-2" asp-controller="Company" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3 me-2"></i>Delete</a> *@
+                                <button class="btn btn-danger mx-2" onclick="confirmDelete('/admin/Company/delete/@item.Id','@item.Name')"> <i class="bi bi-trash-fill"></i> Delete</button>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/company.js"></script>
+    
+}
+

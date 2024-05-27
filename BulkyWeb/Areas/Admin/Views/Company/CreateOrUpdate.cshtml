@@ -1,0 +1,102 @@
+﻿@model Company
+
+
+<div class="card shadow border-0 my-5">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text text-white py-2">@(Model.Id != 0 ? $"Update: {Model.Name}" : "Create")</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            @*enctype needs to be added or it wont work.*@
+            <div>
+                <input asp-for="Id" hidden />
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3 row pt-1">
+                        <label asp-for="Name" class="pt-0" style="font-weight:600"></label> @*asp-for displays name of category parameters.*@
+                        <input asp-for="Name" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 row pt-1">
+                        <label asp-for=PhoneNumber class="pt-0" style="font-weight:600"></label>
+                        <input asp-for="PhoneNumber" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 row pt-1">
+                        <label asp-for="StreetAdress" class="pt-0" style="font-weight:600"></label>
+                        <input asp-for="StreetAdress" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                        <span asp-validation-for="StreetAdress" class="text-danger"></span>
+                    </div>
+
+                    @* <div class="mb-3 row pt-1">
+                    <label asp-for=Company.Description class="pt-0" style="font-weight:600"></label>
+                    <div class="border-1 border-dark" id="editor" style="height: 300px;">
+                    <textarea asp-for="Company.Description" class="text-dark form-control  bg-light bg-opacity-10"></textarea>
+                    </div>
+                    </div> *@
+
+                    <div class="mb-3 row pt-1">
+                        <label asp-for="City" class="pt-0" style="font-weight:600"></label>
+                        <input asp-for="City" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                        
+                    </div>
+
+                    <div class="mb-3 row pt-1">
+                        <label asp-for="State" class="pt-0" style="font-weight:600"></label>
+                        <input asp-for="State" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 row pt-1">
+                        <label asp-for="PostalCode" class="pt-0" style="font-weight:600"></label>
+                        <input asp-for="PostalCode" class="text-dark form-control border-dark bg-light bg-opacity-10" />
+                        <span asp-validation-for="PostalCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class=" row col-md-3">
+
+                            @if (Model.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary form-control">Update</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary form-control">Create</button>
+                            }
+                        </div>
+                        <div class=" col-6 col-md-3">
+                            <button asp-controller="Company" asp-action="Index" class="btn btn-outline-secondary form-control">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var quill = new Quill('#editor-container', {
+            theme: 'snow'
+        });
+
+        // Get the hidden textarea
+        var descriptionInput = document.querySelector('#description');
+
+        // Set initial value from textarea
+        quill.root.innerHTML = descriptionInput.value;
+
+        // Listen for changes in Quill and update the textarea
+        quill.on('text-change', function () {
+            descriptionInput.value = quill.root.innerHTML;
+        });
+    </script>
+}
