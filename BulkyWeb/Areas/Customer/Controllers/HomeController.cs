@@ -63,6 +63,7 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
                     cartFromDb.Count += shoppingCart.Count;
                     _unitOfWork.ShoppingCart.Update(cartFromDb);
                     _unitOfWork.Save();
+                    TempData["success"] = "Shopping cart was updated successfully";
                 }
                 else
                 {
@@ -70,8 +71,9 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
                     _unitOfWork.ShoppingCart.Add(shoppingCart);
                    //shoppingCart.Id = 0 if not adding in Details.cshtml then here.
                     _unitOfWork.Save();
+                    TempData["success"] = "Shopping cart created successfully";
                 }
-
+               
                 
 
             }

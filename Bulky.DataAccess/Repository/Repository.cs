@@ -1,6 +1,7 @@
 ﻿using BulkyBook.DataAccess.Data;
 using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq.Expressions;
 
 namespace BulkyBook.DataAccess.Repository;
@@ -19,42 +20,56 @@ public class Repository<T> : IRepository<T> where T : class //Repository class i
         //_db.Products.Include(u => u.Category);
     }
 
-  
+
     public void Add(T entity)
     {
         //_db.Add(entity);
         dbSet.Add(entity);
     }
 
-    public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+    public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
     {
-        IQueryable<T> values = dbSet.Where(filter);
-        
+        IQueryable<T> query;
+        if (tracked)
+        {
+            query = dbSet;
+
+        }
+        else
+        {
+            query = dbSet.AsNoTracking();
+        }
+
+        query = query.Where(filter);
         if (!string.IsNullOrEmpty(includeProperties))
         {
-            foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var includeProp in includeProperties
+                .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                values = values.Include(item);
+                query = query.Include(includeProp);
             }
         }
-        return  values.FirstOrDefault();
+        return query.FirstOrDefault();
+
     }
 
     //Include can have multiple inputs like "Category,CoverType,ect" thats why we need to make comma seperator: necw char[]{','}.
-    public IEnumerable<T> GetAll(string? includeProperties = null)
+    public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
     {
-        IQueryable<T> values = dbSet;
+        IQueryable<T> query = dbSet;
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
         if (!string.IsNullOrEmpty(includeProperties))
         {
-            //values = values.Include(includeProperties);
-
-            foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var includeProp in includeProperties
+                .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-               values = values.Include(item);
+                query = query.Include(includeProp);
             }
         }
-
-        return values.ToList();
+        return query.ToList();
     }
 
     public void Remove(T entity)

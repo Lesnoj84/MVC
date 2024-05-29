@@ -10,8 +10,8 @@ namespace BulkyBook.DataAccess.Repository.IRepository
     public interface IRepository<T> where T : class //Method Holder
     {
         //T can be all kind of obj like Category or Product ect...
-        IEnumerable<T> GetAll(string? includeProperties = null);
-        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
+        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false);
         void Add(T entity);
         //void Update(T entity);
         void Remove(T entity);
