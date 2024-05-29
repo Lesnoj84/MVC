@@ -174,6 +174,11 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
                 user.StreetName = Input.StreetName;
                 user.PostalCode = Input.PostalCode;
 
+                if (Input.Role == SD.Role_Company)
+                {
+                    user.CompanyId = Input.CompanyId;
+
+                }
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
