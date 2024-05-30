@@ -35,7 +35,7 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
             };
 
 
-                return View();
+                return View(ShoppingCartVM);
         }
     }
 }
